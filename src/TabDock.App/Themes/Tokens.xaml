@@ -1,0 +1,26 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=System.Runtime">
+  <!-- Tokens independientes del tema: tipografía, tamaños y radios. Los colores están en Light/Dark/HighContrast.xaml. -->
+
+  <!-- Inter (OFL) empaquetada, con Segoe UI Variable como respaldo. SF Pro no se empaqueta: su licencia lo impide. -->
+  <FontFamily x:Key="Font.Ui">pack://application:,,,/Fonts/#Inter, Segoe UI Variable Text, Segoe UI</FontFamily>
+
+  <sys:Double x:Key="FontSize.Body">13</sys:Double>
+  <sys:Double x:Key="FontSize.Tab">13</sys:Double>
+  <sys:Double x:Key="FontSize.Subtitle">11</sys:Double>
+  <sys:Double x:Key="FontSize.Section">11</sys:Double>
+  <sys:Double x:Key="FontSize.Badge">10</sys:Double>
+  <sys:Double x:Key="FontSize.Title">20</sys:Double>
+
+  <CornerRadius x:Key="Radius.Window">12</CornerRadius>
+  <CornerRadius x:Key="Radius.Tab">8</CornerRadius>
+  <CornerRadius x:Key="Radius.Control">8</CornerRadius>
+  <CornerRadius x:Key="Radius.Small">4</CornerRadius>
+
+  <!-- Densidad cómoda (36) / compacta (28): el selector llega con los ajustes en la Fase 7. -->
+  <sys:Double x:Key="Size.Tab.Height">36</sys:Double>
+  <sys:Double x:Key="Size.Control.Height">30</sys:Double>
+  <!-- Barra de título: altura de los botones de ventana y de la zona arrastrable. -->
+  <sys:Double x:Key="Size.Caption.Height">40</sys:Double>
+</ResourceDictionary>

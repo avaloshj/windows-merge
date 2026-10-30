@@ -1,0 +1,117 @@
+// Enumeración y metadatos de ventanas (user32)
+EnumWindows
+IsWindow
+IsWindowVisible
+IsIconic
+IsZoomed
+GetWindow
+GetWindowRect
+GetWindowLong
+GetWindowTextLength
+GetWindowText
+GetClassName
+GetWindowThreadProcessId
+WINDOW_EX_STYLE
+
+// DWM (dwmapi)
+DwmGetWindowAttribute
+DWMWINDOWATTRIBUTE
+
+// Procesos y tokens (kernel32 / advapi32)
+OpenProcess
+QueryFullProcessImageName
+GetProcessTimes
+OpenProcessToken
+GetTokenInformation
+TOKEN_ELEVATION
+WIN32_ERROR
+
+// Estilo de ventana DWM (Fase 2)
+DwmSetWindowAttribute
+DWM_WINDOW_CORNER_PREFERENCE
+DWM_SYSTEMBACKDROP_TYPE
+
+// Monitores (Fase 2: margen al maximizar con chrome propio)
+MonitorFromWindow
+GetMonitorInfo
+MONITORINFO
+
+// Captura, posicionamiento y restauración (Fase 3)
+GetWindowPlacement
+SetWindowPlacement
+WINDOWPLACEMENT
+ShowWindow
+ShowWindowAsync
+SetWindowPos
+SetForegroundWindow
+PostMessage
+WM_CLOSE
+IsHungAppWindow
+GetAncestor
+
+// Eventos de ventana (Fase 3)
+SetWinEventHook
+UnhookWinEvent
+EVENT_SYSTEM_FOREGROUND
+EVENT_SYSTEM_MOVESIZESTART
+EVENT_SYSTEM_MOVESIZEEND
+EVENT_SYSTEM_MINIMIZESTART
+EVENT_SYSTEM_MINIMIZEEND
+EVENT_OBJECT_CREATE
+EVENT_OBJECT_DESTROY
+EVENT_OBJECT_SHOW
+EVENT_OBJECT_HIDE
+EVENT_OBJECT_LOCATIONCHANGE
+EVENT_OBJECT_NAMECHANGE
+EVENT_OBJECT_CLOAKED
+EVENT_OBJECT_UNCLOAKED
+WINEVENT_OUTOFCONTEXT
+WINEVENT_SKIPOWNPROCESS
+OBJECT_IDENTIFIER
+CHILDID_SELF
+GetForegroundWindow
+
+// Atajos globales (Fase 4)
+RegisterHotKey
+UnregisterHotKey
+HOT_KEY_MODIFIERS
+WM_HOTKEY
+
+// Vistas previas en vivo y cursor (Fase 5)
+DwmRegisterThumbnail
+DwmUnregisterThumbnail
+DwmUpdateThumbnailProperties
+DwmQueryThumbnailSourceSize
+DWM_THUMBNAIL_PROPERTIES
+GetCursorPos
+DWM_TNP_RECTDESTINATION
+DWM_TNP_OPACITY
+DWM_TNP_VISIBLE
+DWM_TNP_SOURCECLIENTAREAONLY
+
+// Barra de tareas y escritorios virtuales (Fase 6)
+ITaskbarList
+TaskbarList
+IVirtualDesktopManager
+VirtualDesktopManager
+
+// Orden Z del marco, hueco y estado real del ratón (Fase 7)
+WM_WINDOWPOSCHANGED
+WINDOWPOS
+SetWindowRgn
+CreateRectRgn
+CombineRgn
+DeleteObject
+GetAsyncKeyState
+VIRTUAL_KEY
+
+// Sombra de ventanas sin marco nativo (Fase 7)
+GetClientRect
+ClientToScreen
+DWMNCRENDERINGPOLICY
+
+// Inicio con Windows y diagnóstico (Fase 7): monitores y escala
+EnumDisplayMonitors
+GetDpiForMonitor
+MONITOR_DPI_TYPE
+MONITORINFOF_PRIMARY

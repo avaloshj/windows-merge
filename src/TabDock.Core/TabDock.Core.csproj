@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Dominio puro: sin Win32 ni WPF. El TFM sin "-windows" lo garantiza en compilación. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <RootNamespace>TabDock.Core</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Solo la abstracción de logging (sin implementación ni dependencias de plataforma). -->
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="TabDock.Core.Tests" />
+  </ItemGroup>
+
+</Project>

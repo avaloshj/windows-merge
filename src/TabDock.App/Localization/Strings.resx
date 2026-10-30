@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="App_Name" xml:space="preserve">
+    <value>TabDock</value>
+  </data>
+  <data name="App_AlreadyRunning" xml:space="preserve">
+    <value>TabDock ya se está ejecutando.</value>
+  </data>
+  <data name="Error_WindowNotFound" xml:space="preserve">
+    <value>La ventana ya no existe.</value>
+  </data>
+  <data name="Diag_Title" xml:space="preserve">
+    <value>Diagnóstico de ventanas</value>
+  </data>
+  <data name="Diag_Subtitle" xml:space="preserve">
+    <value>Ventanas de primer nivel detectadas y motivo por el que se pueden o no agrupar.</value>
+  </data>
+  <data name="Diag_Refresh" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="Diag_OnlyEligible" xml:space="preserve">
+    <value>Solo elegibles</value>
+  </data>
+  <data name="Diag_ShowTitles" xml:space="preserve">
+    <value>Mostrar títulos</value>
+  </data>
+  <data name="Diag_ShowTitlesHint" xml:space="preserve">
+    <value>Los títulos pueden contener datos personales; por defecto se muestran enmascarados.</value>
+  </data>
+  <data name="Diag_OpenLogs" xml:space="preserve">
+    <value>Abrir carpeta de logs</value>
+  </data>
+  <data name="Diag_Summary" xml:space="preserve">
+    <value>{0} ventanas · {1} elegibles · {2} deshabilitadas</value>
+  </data>
+  <data name="Diag_Empty" xml:space="preserve">
+    <value>No hay ventanas que coincidan con el filtro.</value>
+  </data>
+  <data name="Diag_Unknown" xml:space="preserve">
+    <value>(desconocido)</value>
+  </data>
+  <data name="Diag_Col_Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Diag_Col_Reason" xml:space="preserve">
+    <value>Motivo</value>
+  </data>
+  <data name="Diag_Col_Executable" xml:space="preserve">
+    <value>Ejecutable</value>
+  </data>
+  <data name="Diag_Col_Class" xml:space="preserve">
+    <value>Clase</value>
+  </data>
+  <data name="Diag_Col_Pid" xml:space="preserve">
+    <value>PID</value>
+  </data>
+  <data name="Diag_Col_Size" xml:space="preserve">
+    <value>Tamaño</value>
+  </data>
+  <data name="Diag_Col_Title" xml:space="preserve">
+    <value>Título</value>
+  </data>
+  <data name="Diag_Col_Handle" xml:space="preserve">
+    <value>HWND</value>
+  </data>
+  <data name="Status_Eligible" xml:space="preserve">
+    <value>Elegible</value>
+  </data>
+  <data name="Status_Excluded" xml:space="preserve">
+    <value>Excluida</value>
+  </data>
+  <data name="Status_Disabled" xml:space="preserve">
+    <value>Deshabilitada</value>
+  </data>
+  <data name="Reason_None" xml:space="preserve">
+    <value>—</value>
+  </data>
+  <data name="Reason_OwnProcess" xml:space="preserve">
+    <value>Ventana de TabDock</value>
+  </data>
+  <data name="Reason_NotVisible" xml:space="preserve">
+    <value>No visible</value>
+  </data>
+  <data name="Reason_Cloaked" xml:space="preserve">
+    <value>Oculta por DWM (otro escritorio o suspendida)</value>
+  </data>
+  <data name="Reason_HasOwner" xml:space="preserve">
+    <value>Tiene ventana propietaria (diálogo o auxiliar)</value>
+  </data>
+  <data name="Reason_ToolWindow" xml:space="preserve">
+    <value>Ventana de herramientas</value>
+  </data>
+  <data name="Reason_ExcludedClass" xml:space="preserve">
+    <value>Clase excluida (diálogo, menú o shell)</value>
+  </data>
+  <data name="Reason_EmptyTitle" xml:space="preserve">
+    <value>Sin título</value>
+  </data>
+  <data name="Reason_TooSmall" xml:space="preserve">
+    <value>Más pequeña que el tamaño mínimo</value>
+  </data>
+  <data name="Reason_ProcessInaccessible" xml:space="preserve">
+    <value>Proceso no accesible</value>
+  </data>
+  <data name="Reason_ElevatedProcess" xml:space="preserve">
+    <value>Proceso elevado (ejecutado como administrador)</value>
+  </data>
+  <data name="Diag_OpenDemoFrame" xml:space="preserve">
+    <value>Abrir marco de demostración</value>
+  </data>
+  <data name="Frame_DemoTitle" xml:space="preserve">
+    <value>Demostración — TabDock</value>
+  </data>
+  <data name="Frame_Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="Frame_Minimize" xml:space="preserve">
+    <value>Minimizar</value>
+  </data>
+  <data name="Frame_Maximize" xml:space="preserve">
+    <value>Maximizar</value>
+  </data>
+  <data name="Frame_Restore" xml:space="preserve">
+    <value>Restaurar</value>
+  </data>
+  <data name="Frame_ToggleSidebar" xml:space="preserve">
+    <value>Mostrar u ocultar la barra lateral (Ctrl+Alt+B)</value>
+  </data>
+  <data name="Frame_Search" xml:space="preserve">
+    <value>Buscar ventanas</value>
+  </data>
+  <data name="Frame_SectionWindows" xml:space="preserve">
+    <value>VENTANAS</value>
+  </data>
+  <data name="Frame_TabList" xml:space="preserve">
+    <value>Ventanas del grupo</value>
+  </data>
+  <data name="Frame_ResizeSidebar" xml:space="preserve">
+    <value>Ajustar el ancho de la barra lateral</value>
+  </data>
+  <data name="Frame_SlotPlaceholder" xml:space="preserve">
+    <value>La ventana activa se mostrará aquí.</value>
+  </data>
+  <data name="Frame_Empty" xml:space="preserve">
+    <value>No hay ventanas de este programa abiertas.</value>
+  </data>
+  <data name="Frame_NoResults" xml:space="preserve">
+    <value>Ninguna ventana coincide con la búsqueda.</value>
+  </data>
+  <data name="Tab_Close" xml:space="preserve">
+    <value>Cerrar ventana</value>
+  </data>
+  <data name="Tab_Dirty" xml:space="preserve">
+    <value>cambios sin guardar</value>
+  </data>
+  <data name="Tab_Unresponsive" xml:space="preserve">
+    <value>no responde</value>
+  </data>
+  <data name="Tab_UnresponsiveNotice" xml:space="preserve">
+    <value>No responde</value>
+  </data>
+  <data name="Tab_Pinned" xml:space="preserve">
+    <value>fijada</value>
+  </data>
+  <data name="Tab_Rename" xml:space="preserve">
+    <value>Nuevo nombre de la pestaña</value>
+  </data>
+  <data name="Menu_Rename" xml:space="preserve">
+    <value>Renombrar</value>
+  </data>
+  <data name="Menu_Color" xml:space="preserve">
+    <value>Cambiar color</value>
+  </data>
+  <data name="Menu_ColorAutomatic" xml:space="preserve">
+    <value>Automático</value>
+  </data>
+  <data name="Menu_ColorSwatch" xml:space="preserve">
+    <value>Color {0}</value>
+  </data>
+  <data name="Menu_Pin" xml:space="preserve">
+    <value>Fijar</value>
+  </data>
+  <data name="Menu_Unpin" xml:space="preserve">
+    <value>Desfijar</value>
+  </data>
+  <data name="Menu_Detach" xml:space="preserve">
+    <value>Desacoplar</value>
+  </data>
+  <data name="Menu_MoveToGroup" xml:space="preserve">
+    <value>Mover a otro grupo</value>
+  </data>
+  <data name="Menu_NoOtherGroups" xml:space="preserve">
+    <value>No hay otros grupos</value>
+  </data>
+  <data name="Menu_CloseWindow" xml:space="preserve">
+    <value>Cerrar ventana</value>
+  </data>
+  <data name="Menu_CloseOthers" xml:space="preserve">
+    <value>Cerrar las demás</value>
+  </data>
+  <data name="Search_Title" xml:space="preserve">
+    <value>Búsqueda rápida</value>
+  </data>
+  <data name="Search_Placeholder" xml:space="preserve">
+    <value>Buscar proyecto o archivo…</value>
+  </data>
+  <data name="Search_Results" xml:space="preserve">
+    <value>Resultados</value>
+  </data>
+  <data name="Search_NoResults" xml:space="preserve">
+    <value>Ninguna ventana coincide.</value>
+  </data>
+  <data name="Tab_EmptyWindow" xml:space="preserve">
+    <value>Ventana vacía {0}</value>
+  </data>
+  <data name="Remote_Ssh" xml:space="preserve">
+    <value>SSH</value>
+  </data>
+  <data name="Remote_Wsl" xml:space="preserve">
+    <value>WSL</value>
+  </data>
+  <data name="Remote_DevContainer" xml:space="preserve">
+    <value>Container</value>
+  </data>
+  <data name="Remote_Other" xml:space="preserve">
+    <value>Remoto</value>
+  </data>
+  <data name="Diag_CaptureSelected" xml:space="preserve">
+    <value>Agrupar seleccionadas en un marco</value>
+  </data>
+  <data name="Diag_CaptureHint" xml:space="preserve">
+    <value>Selecciona ventanas elegibles (Ctrl o Mayús + clic) y agrúpalas en un marco.</value>
+  </data>
+  <data name="Frame_ManualGroupTitle" xml:space="preserve">
+    <value>Grupo</value>
+  </data>
+  <data name="Error_NothingToCapture" xml:space="preserve">
+    <value>No hay ventanas elegibles para agrupar.</value>
+  </data>
+  <data name="Error_WindowOperationFailed" xml:space="preserve">
+    <value>Windows no permitió completar la operación sobre la ventana.</value>
+  </data>
+  <data name="Error_StateSaveFailed" xml:space="preserve">
+    <value>No se pudo guardar el estado de recuperación; la ventana no se ha agrupado.</value>
+  </data>
+  <data name="Error_InvalidTransition" xml:space="preserve">
+    <value>Operación no válida para el estado actual de la ventana.</value>
+  </data>
+  <data name="Error_CannotCaptureFrame" xml:space="preserve">
+    <value>TabDock no puede agrupar sus propias ventanas.</value>
+  </data>
+  <data name="Error_WindowNotInGroup" xml:space="preserve">
+    <value>La ventana ya no pertenece al grupo.</value>
+  </data>
+  <data name="Error_HotkeyInUse" xml:space="preserve">
+    <value>Otro programa ya usa ese atajo.</value>
+  </data>
+  <data name="Tray_MergeRule" xml:space="preserve">
+    <value>Agrupar ventanas de {0}</value>
+  </data>
+  <data name="Notice_ElevatedWindows" xml:space="preserve">
+    <value>{0} ventana(s) de {1} no se pueden agrupar porque se ejecutan como administrador.</value>
+  </data>
+  <data name="Key_Ctrl" xml:space="preserve">
+    <value>Ctrl</value>
+  </data>
+  <data name="Key_Alt" xml:space="preserve">
+    <value>Alt</value>
+  </data>
+  <data name="Key_Shift" xml:space="preserve">
+    <value>Mayús</value>
+  </data>
+  <data name="Key_Win" xml:space="preserve">
+    <value>Win</value>
+  </data>
+  <data name="Key_Tab" xml:space="preserve">
+    <value>Tab</value>
+  </data>
+  <data name="Key_PageUp" xml:space="preserve">
+    <value>RePág</value>
+  </data>
+  <data name="Key_PageDown" xml:space="preserve">
+    <value>AvPág</value>
+  </data>
+  <data name="Tray_UnmergeAll" xml:space="preserve">
+    <value>Separar todas</value>
+  </data>
+  <data name="Tray_Pause" xml:space="preserve">
+    <value>Pausar TabDock</value>
+  </data>
+  <data name="Tray_Resume" xml:space="preserve">
+    <value>Reanudar TabDock</value>
+  </data>
+  <data name="Tray_Diagnostics" xml:space="preserve">
+    <value>Diagnóstico de ventanas</value>
+  </data>
+  <data name="Tray_OpenLogs" xml:space="preserve">
+    <value>Abrir carpeta de logs</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Salir (restaura todas las ventanas)</value>
+  </data>
+  <data name="Tray_NothingToMerge" xml:space="preserve">
+    <value>No hay ventanas de {0} abiertas.</value>
+  </data>
+  <data name="Tray_HotkeyConflicts" xml:space="preserve">
+    <value>No se pudieron registrar estos atajos porque otro programa ya los usa: {0}.</value>
+  </data>
+  <data name="Tray_FirstRun" xml:space="preserve">
+    <value>TabDock está en la bandeja del sistema. Pulsa {0} para agrupar las ventanas de VS Code.</value>
+  </data>
+  <data name="Tray_Settings" xml:space="preserve">
+    <value>Configuración…</value>
+  </data>
+  <data name="Error_DiagnosticsExport" xml:space="preserve">
+    <value>No se pudo guardar el diagnóstico. Comprueba que la carpeta existe y que tienes permiso para escribir en ella.</value>
+  </data>
+  <data name="Error_StartupRegistration" xml:space="preserve">
+    <value>No se pudo cambiar el inicio con Windows.</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Configuración de TabDock</value>
+  </data>
+  <data name="Settings_Section_General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="Settings_Section_Programs" xml:space="preserve">
+    <value>Programas</value>
+  </data>
+  <data name="Settings_Section_Appearance" xml:space="preserve">
+    <value>Apariencia</value>
+  </data>
+  <data name="Settings_Section_Hotkeys" xml:space="preserve">
+    <value>Atajos</value>
+  </data>
+  <data name="Settings_Section_Advanced" xml:space="preserve">
+    <value>Avanzado</value>
+  </data>
+  <data name="Settings_Section_Diagnostics" xml:space="preserve">
+    <value>Diagnóstico</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="Settings_LanguageRestart" xml:space="preserve">
+    <value>El idioma cambiará la próxima vez que inicies TabDock.</value>
+  </data>
+  <data name="Settings_Startup" xml:space="preserve">
+    <value>Inicio</value>
+  </data>
+  <data name="Settings_StartWithWindows" xml:space="preserve">
+    <value>Iniciar TabDock con Windows</value>
+  </data>
+  <data name="Settings_StartWithWindowsHint" xml:space="preserve">
+    <value>Solo para tu usuario. No necesita permisos de administrador.</value>
+  </data>
+  <data name="Settings_ShowOnboarding" xml:space="preserve">
+    <value>Ver la introducción otra vez</value>
+  </data>
+  <data name="Settings_ProgramsHint" xml:space="preserve">
+    <value>Las ventanas de los programas activados se agrupan en un marco con pestañas.</value>
+  </data>
+  <data name="Settings_Rule_AutoMerge" xml:space="preserve">
+    <value>Agrupar ventanas nuevas</value>
+  </data>
+  <data name="Settings_Rule_MergeOnStartup" xml:space="preserve">
+    <value>Agrupar al iniciar TabDock</value>
+  </data>
+  <data name="Settings_Rule_Parser" xml:space="preserve">
+    <value>Cómo leer el título de la ventana</value>
+  </data>
+  <data name="Settings_Rule_Remove" xml:space="preserve">
+    <value>Quitar</value>
+  </data>
+  <data name="Settings_Parser_VsCode" xml:space="preserve">
+    <value>VS Code (proyecto y archivo)</value>
+  </data>
+  <data name="Settings_Parser_Generic" xml:space="preserve">
+    <value>Genérico (título completo)</value>
+  </data>
+  <data name="Settings_AddProgram" xml:space="preserve">
+    <value>Añadir un programa</value>
+  </data>
+  <data name="Settings_AddProgramHint" xml:space="preserve">
+    <value>Programas con ventanas abiertas ahora mismo. Ábrelo antes si no aparece.</value>
+  </data>
+  <data name="Settings_AddProgramButton" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="Settings_Theme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="Settings_Theme_System" xml:space="preserve">
+    <value>Igual que Windows</value>
+  </data>
+  <data name="Settings_Theme_Light" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="Settings_Theme_Dark" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="Settings_Mica" xml:space="preserve">
+    <value>Fondo Mica</value>
+  </data>
+  <data name="Settings_MicaHint" xml:space="preserve">
+    <value>Requiere Windows 11 22H2 o posterior. Con alto contraste se usa un fondo sólido.</value>
+  </data>
+  <data name="Settings_Density" xml:space="preserve">
+    <value>Densidad de la barra lateral</value>
+  </data>
+  <data name="Settings_Density_Comfortable" xml:space="preserve">
+    <value>Cómoda</value>
+  </data>
+  <data name="Settings_Density_Compact" xml:space="preserve">
+    <value>Compacta</value>
+  </data>
+  <data name="Settings_HotkeysHint" xml:space="preserve">
+    <value>Haz clic en un atajo y pulsa la nueva combinación. Debe incluir Ctrl, Alt o Win. Esc cancela.</value>
+  </data>
+  <data name="Settings_HotkeyBoxHint" xml:space="preserve">
+    <value>Pulsa la nueva combinación de teclas</value>
+  </data>
+  <data name="Settings_ResetHotkeys" xml:space="preserve">
+    <value>Restablecer atajos</value>
+  </data>
+  <data name="Settings_HideMode" xml:space="preserve">
+    <value>Pestañas inactivas</value>
+  </data>
+  <data name="Settings_HideMode_Hide" xml:space="preserve">
+    <value>Ocultar (recomendado)</value>
+  </data>
+  <data name="Settings_HideMode_TaskbarOnly" xml:space="preserve">
+    <value>Quitar solo de la barra de tareas (no disponible todavía)</value>
+  </data>
+  <data name="Settings_HideModeHint" xml:space="preserve">
+    <value>Las ventanas ocultas vuelven a su sitio al salir de TabDock o si TabDock se cierra inesperadamente.</value>
+  </data>
+  <data name="Settings_HealthCheck" xml:space="preserve">
+    <value>Comprobación periódica</value>
+  </data>
+  <data name="Settings_HealthCheckHint" xml:space="preserve">
+    <value>Cada cuánto se revisan ventanas cerradas, ventanas que no responden y la barra de tareas.</value>
+  </data>
+  <data name="Settings_ForeignCaption" xml:space="preserve">
+    <value>Barra de título de los programas</value>
+  </data>
+  <data name="Settings_ForeignCaptionHint" xml:space="preserve">
+    <value>TabDock no quita la barra de título de otros programas: esa barra hace de barra del grupo (minimizar, maximizar y cerrar pestaña).</value>
+  </data>
+  <data name="Settings_DiagnosticsHint" xml:space="preserve">
+    <value>Crea un archivo ZIP para informar de un problema. Contiene los registros (con títulos, rutas y nombres de proyecto ocultos), la versión de Windows, los monitores y la configuración sin alias ni nombres de proyecto. TabDock no lo envía a ningún sitio.</value>
+  </data>
+  <data name="Settings_ExportDiagnostics" xml:space="preserve">
+    <value>Exportar diagnóstico…</value>
+  </data>
+  <data name="Settings_Diagnostics_Exported" xml:space="preserve">
+    <value>Diagnóstico guardado: {0}</value>
+  </data>
+  <data name="Settings_ZipFilter" xml:space="preserve">
+    <value>Archivo ZIP</value>
+  </data>
+  <data name="Hotkey_Error_ModifierOnly" xml:space="preserve">
+    <value>Pulsa también una tecla, no solo Ctrl, Alt, Mayús o Win.</value>
+  </data>
+  <data name="Hotkey_Error_NeedsModifier" xml:space="preserve">
+    <value>El atajo debe incluir Ctrl, Alt o Win.</value>
+  </data>
+  <data name="Hotkey_Error_Reserved" xml:space="preserve">
+    <value>Windows reserva esta combinación.</value>
+  </data>
+  <data name="Hotkey_Error_Duplicate" xml:space="preserve">
+    <value>Ya lo usa «{0}».</value>
+  </data>
+  <data name="Hotkey_Error_InUse" xml:space="preserve">
+    <value>Otro programa ya usa este atajo. Elige otra combinación.</value>
+  </data>
+  <data name="Command_MergeAll" xml:space="preserve">
+    <value>Agrupar ventanas (Merge All)</value>
+  </data>
+  <data name="Command_UnmergeAll" xml:space="preserve">
+    <value>Separar todas</value>
+  </data>
+  <data name="Command_NextTab" xml:space="preserve">
+    <value>Pestaña siguiente</value>
+  </data>
+  <data name="Command_PreviousTab" xml:space="preserve">
+    <value>Pestaña anterior</value>
+  </data>
+  <data name="Command_ToggleSidebar" xml:space="preserve">
+    <value>Mostrar u ocultar la barra lateral</value>
+  </data>
+  <data name="Command_QuickSearch" xml:space="preserve">
+    <value>Búsqueda rápida</value>
+  </data>
+  <data name="Command_GoToTab" xml:space="preserve">
+    <value>Ir a la pestaña {0}</value>
+  </data>
+  <data name="Onboarding_Title" xml:space="preserve">
+    <value>Bienvenido a TabDock</value>
+  </data>
+  <data name="Onboarding_StepOf" xml:space="preserve">
+    <value>Paso {0} de {1}</value>
+  </data>
+  <data name="Onboarding_Step1_Title" xml:space="preserve">
+    <value>¿Qué programas quieres agrupar?</value>
+  </data>
+  <data name="Onboarding_Step1_Body" xml:space="preserve">
+    <value>TabDock reúne todas las ventanas de un programa en un único marco con pestañas verticales.</value>
+  </data>
+  <data name="Onboarding_Step1_Hint" xml:space="preserve">
+    <value>Puedes cambiarlo cuando quieras en Configuración → Programas.</value>
+  </data>
+  <data name="Onboarding_Running" xml:space="preserve">
+    <value>abierto</value>
+  </data>
+  <data name="Onboarding_Step2_Title" xml:space="preserve">
+    <value>Ajuste recomendado para VS Code</value>
+  </data>
+  <data name="Onboarding_Step2_Body" xml:space="preserve">
+    <value>Es opcional. Con estas líneas, la barra de título de VS Code hace de barra del grupo y TabDock reconoce mejor el nombre de cada proyecto. En VS Code, pulsa Ctrl+Mayús+P, elige «Preferences: Open User Settings (JSON)» y pégalas.</value>
+  </data>
+  <data name="Onboarding_Step2_Hint" xml:space="preserve">
+    <value>TabDock nunca cambia la configuración de VS Code por su cuenta.</value>
+  </data>
+  <data name="Onboarding_Copy" xml:space="preserve">
+    <value>Copiar</value>
+  </data>
+  <data name="Onboarding_Copied" xml:space="preserve">
+    <value>Copiado al portapapeles.</value>
+  </data>
+  <data name="Onboarding_Step3_Title" xml:space="preserve">
+    <value>Pruébalo</value>
+  </data>
+  <data name="Onboarding_Step3_Body" xml:space="preserve">
+    <value>Abre dos o más ventanas de uno de los programas elegidos y pulsa este atajo con una de ellas delante:</value>
+  </data>
+  <data name="Onboarding_Step3_Hint" xml:space="preserve">
+    <value>TabDock sigue en la bandeja del sistema. Al salir, todas las ventanas vuelven a su sitio.</value>
+  </data>
+  <data name="Onboarding_NoHotkey" xml:space="preserve">
+    <value>(atajo desactivado)</value>
+  </data>
+  <data name="Onboarding_MergeNow" xml:space="preserve">
+    <value>Agrupar ahora</value>
+  </data>
+  <data name="Onboarding_Merged" xml:space="preserve">
+    <value>¡Listo! Las ventanas están agrupadas.</value>
+  </data>
+  <data name="Onboarding_Next" xml:space="preserve">
+    <value>Siguiente</value>
+  </data>
+  <data name="Onboarding_Finish" xml:space="preserve">
+    <value>Terminar</value>
+  </data>
+  <data name="Onboarding_Back" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+  <data name="Onboarding_Skip" xml:space="preserve">
+    <value>Saltar</value>
+  </data>
+  <data name="Error_WindowOpen" xml:space="preserve">
+    <value>No se pudo abrir la ventana. TabDock sigue funcionando; el detalle está en los registros.</value>
+  </data>
+  <data name="Settings_Rendering" xml:space="preserve">
+    <value>Dibujo</value>
+  </data>
+  <data name="Settings_LowMemoryRendering" xml:space="preserve">
+    <value>Modo de bajo consumo de memoria</value>
+  </data>
+  <data name="Settings_LowMemoryRenderingHint" xml:space="preserve">
+    <value>Dibuja sin aceleración gráfica: unos 100 MB menos de memoria con el marco abierto, a cambio de algo más de CPU en las animaciones y sin fondo Mica.</value>
+  </data>
+  <data name="Settings_RenderingRestart" xml:space="preserve">
+    <value>Se aplicará la próxima vez que inicies TabDock.</value>
+  </data>
+</root>

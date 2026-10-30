@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TabDock.App\TabDock.App.csproj" />
+  </ItemGroup>
+
+  <!-- Las pruebas de contraste y de movimiento leen los temas directamente. -->
+  <ItemGroup>
+    <None Include="..\..\src\TabDock.App\Themes\Light.xaml" Link="Themes\Light.xaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\src\TabDock.App\Themes\Dark.xaml" Link="Themes\Dark.xaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\src\TabDock.App\Themes\Motion.xaml" Link="Themes\Motion.xaml" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\src\TabDock.App\Themes\Motion.Reduced.xaml" Link="Themes\Motion.Reduced.xaml" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

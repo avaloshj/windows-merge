@@ -1,0 +1,375 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="clr-namespace:TabDock.App.Controls"
+                    xmlns:converters="clr-namespace:TabDock.App.Converters"
+                    xmlns:motion="clr-namespace:TabDock.App.Controls.Motion"
+                    xmlns:vm="clr-namespace:TabDock.App.ViewModels"
+                    xmlns:domain="clr-namespace:TabDock.Core.Domain;assembly=TabDock.Core"
+                    xmlns:loc="clr-namespace:TabDock.App.Localization">
+  <!--
+    Estilos de controles. Se carga después de Tokens, Motion y el tema (ThemeService), por lo que puede usar
+    StaticResource para tokens y movimiento y DynamicResource para colores (cambian con el tema).
+  -->
+
+  <converters:HexToBrushConverter x:Key="HexToBrush" />
+  <converters:RemoteKindToLabelConverter x:Key="RemoteKindToLabel" />
+
+  <!-- Icono de trazo sobre lienzo 24×24. -->
+  <Style TargetType="controls:IconView">
+    <Setter Property="Width" Value="16" />
+    <Setter Property="Height" Value="16" />
+    <Setter Property="Foreground" Value="{DynamicResource Brush.TextSecondary}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="controls:IconView">
+          <Viewbox Stretch="Uniform">
+            <Canvas Width="24" Height="24">
+              <Path Data="{TemplateBinding Data}"
+                    Stroke="{TemplateBinding Foreground}"
+                    StrokeThickness="2"
+                    StrokeStartLineCap="Round"
+                    StrokeEndLineCap="Round"
+                    StrokeLineJoin="Round" />
+            </Canvas>
+          </Viewbox>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Foco de teclado visible y coherente en todos los controles propios. -->
+  <Style x:Key="FocusRing">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Border Margin="-2" BorderBrush="{DynamicResource Brush.FocusRing}" BorderThickness="2" CornerRadius="{StaticResource Radius.Control}" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Botón de icono (28×28) con fondo al pasar el ratón. -->
+  <Style x:Key="IconButton" TargetType="Button">
+    <Setter Property="Width" Value="28" />
+    <Setter Property="Height" Value="28" />
+    <Setter Property="Foreground" Value="{DynamicResource Brush.TextSecondary}" />
+    <Setter Property="FocusVisualStyle" Value="{StaticResource FocusRing}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="Button">
+          <Grid>
+            <Border x:Name="Hover" CornerRadius="6" Background="{DynamicResource Brush.TabHover}" Opacity="0" />
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Trigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="Hover" Storyboard.TargetProperty="Opacity" To="1" Duration="{StaticResource Motion.Duration.Hover}" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.EnterActions>
+              <Trigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="Hover" Storyboard.TargetProperty="Opacity" To="0" Duration="{StaticResource Motion.Duration.Hover}" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </Trigger.ExitActions>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+              <Setter TargetName="Hover" Property="Opacity" Value="1" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Botón × de la pestaña (20×20). -->
+  <Style x:Key="TabCloseButton" TargetType="Button" BasedOn="{StaticResource IconButton}">
+    <Setter Property="Width" Value="20" />
+    <Setter Property="Height" Value="20" />
+  </Style>
+
+  <!-- Campo de búsqueda con icono y texto de ayuda (Tag). -->
+  <Style x:Key="SearchBox" TargetType="TextBox">
+    <Setter Property="Height" Value="{StaticResource Size.Control.Height}" />
+    <Setter Property="Foreground" Value="{DynamicResource Brush.TextPrimary}" />
+    <Setter Property="CaretBrush" Value="{DynamicResource Brush.TextPrimary}" />
+    <Setter Property="SelectionBrush" Value="{DynamicResource Brush.Accent}" />
+    <Setter Property="FontSize" Value="{StaticResource FontSize.Body}" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="TextBox">
+          <Border x:Name="Frame"
+                  CornerRadius="{StaticResource Radius.Control}"
+                  Background="{DynamicResource Brush.SearchBackground}"
+                  BorderBrush="Transparent"
+                  BorderThickness="1.5">
+            <Grid>
+              <controls:IconView Data="{StaticResource Icon.Search}" Width="14" Height="14" HorizontalAlignment="Left" Margin="9,0,0,0" />
+              <TextBlock x:Name="Placeholder"
+                         Text="{TemplateBinding Tag}"
+                         Margin="30,0,8,0"
+                         VerticalAlignment="Center"
+                         Foreground="{DynamicResource Brush.TextSecondary}"
+                         IsHitTestVisible="False"
+                         Visibility="Collapsed" />
+              <ScrollViewer x:Name="PART_ContentHost" Margin="28,0,6,0" VerticalAlignment="Center" Focusable="False" />
+            </Grid>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="Text" Value="">
+              <Setter TargetName="Placeholder" Property="Visibility" Value="Visible" />
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+              <Setter TargetName="Frame" Property="BorderBrush" Value="{DynamicResource Brush.FocusRing}" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Separador redimensionable entre barra lateral y contenido: zona de arrastre de 6 px, línea visible de 1 px. -->
+  <Style x:Key="SidebarSplitter" TargetType="GridSplitter">
+    <Setter Property="Width" Value="6" />
+    <Setter Property="ResizeDirection" Value="Columns" />
+    <Setter Property="ResizeBehavior" Value="PreviousAndNext" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Cursor" Value="SizeWE" />
+    <Setter Property="Focusable" Value="True" />
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="GridSplitter">
+          <Grid Background="{TemplateBinding Background}">
+            <!-- En reposo, Brush.SplitterLine: transparente en claro/oscuro, visible en alto contraste. Con ratón o foco, acento. -->
+            <Border x:Name="Line" Width="1" HorizontalAlignment="Right" Background="{DynamicResource Brush.SplitterLine}" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="Line" Property="Background" Value="{DynamicResource Brush.Accent}" />
+            </Trigger>
+            <Trigger Property="IsKeyboardFocused" Value="True">
+              <Setter TargetName="Line" Property="Background" Value="{DynamicResource Brush.Accent}" />
+              <Setter TargetName="Line" Property="Width" Value="2" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+              <Setter Property="Cursor" Value="Arrow" />
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Contenedor de pestaña: fondo al pasar el ratón (120 ms), entrada y colapso animados. -->
+  <!-- Anillo de foco de pestaña: FocusVisualStyle solo se muestra al navegar con teclado, no con ratón. -->
+  <Style x:Key="TabFocusVisual">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Border CornerRadius="{StaticResource Radius.Tab}" BorderBrush="{DynamicResource Brush.FocusRing}" BorderThickness="2" />
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <Style x:Key="SidebarTabItem" TargetType="ListBoxItem">
+    <Setter Property="Height" Value="{DynamicResource Size.Tab.Height}" />
+    <Setter Property="Margin" Value="0,1" />
+    <Setter Property="Foreground" Value="{DynamicResource Brush.TextPrimary}" />
+    <Setter Property="FocusVisualStyle" Value="{StaticResource TabFocusVisual}" />
+    <Setter Property="AutomationProperties.Name" Value="{Binding AutomationName}" />
+    <Setter Property="motion:Entrance.IsEnabled" Value="True" />
+    <Setter Property="motion:CollapseOnClose.IsClosing" Value="{Binding IsClosing}" />
+    <Setter Property="motion:CollapseOnClose.Command" Value="{Binding DataContext.RemoveTabCommand, RelativeSource={RelativeSource AncestorType=controls:SidebarTabList}}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="ListBoxItem">
+          <Grid Background="Transparent">
+            <Border x:Name="Hover" CornerRadius="{StaticResource Radius.Tab}" Background="{DynamicResource Brush.TabHover}" Opacity="0" />
+            <ContentPresenter x:Name="Content" />
+          </Grid>
+          <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="IsMouseOver" Value="True" />
+                <Condition Property="IsSelected" Value="False" />
+              </MultiTrigger.Conditions>
+              <MultiTrigger.EnterActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="Hover" Storyboard.TargetProperty="Opacity" To="1" Duration="{StaticResource Motion.Duration.Hover}" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </MultiTrigger.EnterActions>
+              <MultiTrigger.ExitActions>
+                <BeginStoryboard>
+                  <Storyboard>
+                    <DoubleAnimation Storyboard.TargetName="Hover" Storyboard.TargetProperty="Opacity" To="0" Duration="{StaticResource Motion.Duration.Hover}" />
+                  </Storyboard>
+                </BeginStoryboard>
+              </MultiTrigger.ExitActions>
+            </MultiTrigger>
+            <!-- Se atenúa el contenido, no el contenedor: la animación de entrada fija la opacidad del contenedor. -->
+            <DataTrigger Binding="{Binding IsUnresponsive}" Value="True">
+              <Setter TargetName="Content" Property="Opacity" Value="0.5" />
+            </DataTrigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+
+  <!-- Contenido de la pestaña: icono, punto de color, nombre, subtítulo, badge remoto, ● sin guardar / ×. -->
+  <DataTemplate x:Key="SidebarTabTemplate" DataType="{x:Type vm:TabViewModel}">
+    <Grid x:Name="Root" Margin="10,0,6,0" Background="Transparent" motion:PressScale.IsEnabled="True">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+
+      <controls:IconView Grid.Column="0" Data="{StaticResource Icon.CodeXml}" VerticalAlignment="Center" />
+      <Ellipse x:Name="Dot" Grid.Column="1" Width="8" Height="8" Margin="8,0,0,0" VerticalAlignment="Center"
+               Fill="{Binding ColorHex, Converter={StaticResource HexToBrush}}" />
+
+      <StackPanel x:Name="Texts" Grid.Column="2" Margin="8,0,4,0" VerticalAlignment="Center">
+        <TextBlock Text="{Binding DisplayName}" FontSize="{StaticResource FontSize.Tab}" FontWeight="Medium" TextTrimming="CharacterEllipsis" />
+        <TextBlock x:Name="Subtitle" Text="{Binding Subtitle}" FontSize="{StaticResource FontSize.Subtitle}"
+                   Foreground="{DynamicResource Brush.TextSecondary}" TextTrimming="CharacterEllipsis" />
+      </StackPanel>
+
+      <!-- Renombrar en línea (doble clic, F2 o menú): Intro confirma, Esc cancela; vacío vuelve al nombre del proyecto. -->
+      <TextBox x:Name="RenameBox"
+               Grid.Column="2"
+               Grid.ColumnSpan="2"
+               Margin="6,0,2,0"
+               Padding="2,1"
+               VerticalAlignment="Center"
+               Visibility="Collapsed"
+               FontSize="{StaticResource FontSize.Tab}"
+               Foreground="{DynamicResource Brush.TextPrimary}"
+               CaretBrush="{DynamicResource Brush.TextPrimary}"
+               Background="{DynamicResource Brush.BgWindow}"
+               BorderBrush="{DynamicResource Brush.FocusRing}"
+               Text="{Binding RenameText, UpdateSourceTrigger=PropertyChanged}"
+               controls:InlineRename.IsActive="{Binding IsRenaming}"
+               AutomationProperties.Name="{loc:Loc Tab_Rename}" />
+
+      <Border x:Name="Badge" Grid.Column="3" Margin="0,0,2,0" Padding="5,1" VerticalAlignment="Center"
+              CornerRadius="{StaticResource Radius.Small}" Background="{DynamicResource Brush.BadgeBackground}">
+        <TextBlock Text="{Binding RemoteKind, Converter={StaticResource RemoteKindToLabel}}"
+                   FontSize="{StaticResource FontSize.Badge}" FontWeight="SemiBold" Foreground="{DynamicResource Brush.BadgeText}" />
+      </Border>
+
+      <controls:IconView x:Name="PinIcon" Grid.Column="3" Data="{StaticResource Icon.Pin}" Width="12" Height="12"
+                         Margin="2,0,2,0" VerticalAlignment="Center" Visibility="Collapsed" />
+
+      <Grid x:Name="Trailing" Grid.Column="4" Width="20" Height="20" Margin="2,0,0,0">
+        <Ellipse x:Name="DirtyDot" Width="6" Height="6" Fill="{DynamicResource Brush.TextSecondary}" Visibility="Collapsed" />
+        <Button x:Name="CloseButton"
+                Style="{StaticResource TabCloseButton}"
+                Visibility="Hidden"
+                Command="{Binding DataContext.CloseTabCommand, RelativeSource={RelativeSource AncestorType=controls:SidebarTabList}}"
+                CommandParameter="{Binding}"
+                ToolTip="{loc:Loc Tab_Close}"
+                AutomationProperties.Name="{loc:Loc Tab_Close}">
+          <controls:IconView Data="{StaticResource Icon.X}" Width="12" Height="12" />
+        </Button>
+      </Grid>
+    </Grid>
+
+    <DataTemplate.Triggers>
+      <DataTrigger Binding="{Binding Subtitle}" Value="">
+        <Setter TargetName="Subtitle" Property="Visibility" Value="Collapsed" />
+      </DataTrigger>
+      <DataTrigger Binding="{Binding Subtitle}" Value="{x:Null}">
+        <Setter TargetName="Subtitle" Property="Visibility" Value="Collapsed" />
+      </DataTrigger>
+      <DataTrigger Binding="{Binding RemoteKind}" Value="{x:Static domain:RemoteKind.None}">
+        <Setter TargetName="Badge" Property="Visibility" Value="Collapsed" />
+      </DataTrigger>
+      <DataTrigger Binding="{Binding IsDirty}" Value="True">
+        <Setter TargetName="DirtyDot" Property="Visibility" Value="Visible" />
+      </DataTrigger>
+      <DataTrigger Binding="{Binding IsPinned}" Value="True">
+        <Setter TargetName="PinIcon" Property="Visibility" Value="Visible" />
+      </DataTrigger>
+      <DataTrigger Binding="{Binding IsRenaming}" Value="True">
+        <Setter TargetName="Texts" Property="Visibility" Value="Collapsed" />
+        <Setter TargetName="Badge" Property="Visibility" Value="Collapsed" />
+        <Setter TargetName="PinIcon" Property="Visibility" Value="Collapsed" />
+        <Setter TargetName="RenameBox" Property="Visibility" Value="Visible" />
+      </DataTrigger>
+      <!-- Aviso visible de ventana que no responde: sustituye al subtítulo. -->
+      <DataTrigger Binding="{Binding IsUnresponsive}" Value="True">
+        <Setter TargetName="Subtitle" Property="Text" Value="{loc:Loc Tab_UnresponsiveNotice}" />
+        <Setter TargetName="Subtitle" Property="Visibility" Value="Visible" />
+      </DataTrigger>
+      <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+        <Setter TargetName="CloseButton" Property="Visibility" Value="Visible" />
+        <Setter TargetName="DirtyDot" Property="Visibility" Value="Collapsed" />
+      </DataTrigger>
+      <DataTrigger Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType=ListBoxItem}}" Value="True">
+        <Setter TargetName="CloseButton" Property="Visibility" Value="Visible" />
+        <Setter TargetName="DirtyDot" Property="Visibility" Value="Collapsed" />
+      </DataTrigger>
+      <!-- Barra colapsada (56 px): solo icono y punto de color; el nombre pasa al tooltip. -->
+      <DataTrigger Binding="{Binding DataContext.IsSidebarCollapsed, RelativeSource={RelativeSource AncestorType=controls:SidebarTabList}}" Value="True">
+        <Setter TargetName="Texts" Property="Visibility" Value="Collapsed" />
+        <Setter TargetName="Badge" Property="Visibility" Value="Collapsed" />
+        <Setter TargetName="Trailing" Property="Visibility" Value="Collapsed" />
+        <Setter TargetName="PinIcon" Property="Visibility" Value="Collapsed" />
+        <Setter TargetName="Root" Property="Margin" Value="4,0" />
+        <Setter TargetName="Dot" Property="Margin" Value="4,0,0,0" />
+        <Setter TargetName="Root" Property="ToolTip" Value="{Binding DisplayName}" />
+      </DataTrigger>
+    </DataTemplate.Triggers>
+  </DataTemplate>
+
+  <!-- Lista de pestañas con indicador deslizante (PART_Indicator). -->
+  <Style TargetType="controls:SidebarTabList">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="0" />
+    <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+    <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
+    <!-- Sin virtualización: una ventana por pestaña (decenas como mucho) y así la entrada no se repite al desplazar. -->
+    <Setter Property="VirtualizingPanel.IsVirtualizing" Value="False" />
+    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+    <Setter Property="ItemContainerStyle" Value="{StaticResource SidebarTabItem}" />
+    <Setter Property="ItemTemplate" Value="{StaticResource SidebarTabTemplate}" />
+    <Setter Property="Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="controls:SidebarTabList">
+          <ScrollViewer Focusable="False" Padding="8,0,8,8">
+            <Grid>
+              <Border x:Name="PART_Indicator"
+                      VerticalAlignment="Top"
+                      CornerRadius="{StaticResource Radius.Tab}"
+                      Background="{DynamicResource Brush.TabActive}"
+                      BorderBrush="{DynamicResource Brush.TabActiveBorder}"
+                      BorderThickness="1"
+                      Opacity="0"
+                      IsHitTestVisible="False">
+                <Border.Effect>
+                  <DropShadowEffect BlurRadius="3" ShadowDepth="1" Direction="270"
+                                    Opacity="{DynamicResource Shadow.TabActive.Opacity}" Color="Black" />
+                </Border.Effect>
+              </Border>
+              <ItemsPresenter />
+            </Grid>
+          </ScrollViewer>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

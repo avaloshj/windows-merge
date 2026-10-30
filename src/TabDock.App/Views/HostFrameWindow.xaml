@@ -1,0 +1,198 @@
+<Window x:Class="TabDock.App.Views.HostFrameWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:TabDock.App.Controls"
+        xmlns:loc="clr-namespace:TabDock.App.Localization"
+        xmlns:vm="clr-namespace:TabDock.App.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:HostFrameViewModel}"
+        x:Name="Frame"
+        Width="1200" Height="780" MinWidth="640" MinHeight="420"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="{StaticResource Font.Ui}"
+        FontSize="{StaticResource FontSize.Body}"
+        Foreground="{DynamicResource Brush.TextPrimary}"
+        Background="{DynamicResource Brush.WindowSurface}"
+        UseLayoutRounding="True">
+  <!--
+    Marco anfitrión. Barra de título propia de 40 px con los botones de ventana de Windows a la derecha; debajo, la
+    barra lateral y el hueco (Slot) sobre el que se coloca la ventana activa del grupo (ADR 0001).
+    GlassFrameThickness lo ajusta el código: -1 con Mica, 0 sin Mica.
+  -->
+  <Window.Title>
+    <MultiBinding StringFormat="{}{0} — {1}" FallbackValue="TabDock">
+      <Binding Path="SelectedTab.DisplayName" />
+      <Binding Path="Title" />
+    </MultiBinding>
+  </Window.Title>
+
+  <WindowChrome.WindowChrome>
+    <WindowChrome CaptionHeight="{StaticResource Size.Caption.Height}"
+                  ResizeBorderThickness="6"
+                  CornerRadius="0"
+                  GlassFrameThickness="0"
+                  UseAeroCaptionButtons="False"
+                  NonClientFrameEdges="None" />
+  </WindowChrome.WindowChrome>
+
+  <Window.InputBindings>
+    <KeyBinding Modifiers="Ctrl+Alt" Key="B" Command="{Binding ToggleSidebarCommand}" />
+    <KeyBinding Key="F11" Command="{Binding WindowFullScreenCommand, ElementName=Frame}" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D1" Command="{Binding SelectTabAtCommand}" CommandParameter="1" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D2" Command="{Binding SelectTabAtCommand}" CommandParameter="2" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D3" Command="{Binding SelectTabAtCommand}" CommandParameter="3" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D4" Command="{Binding SelectTabAtCommand}" CommandParameter="4" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D5" Command="{Binding SelectTabAtCommand}" CommandParameter="5" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D6" Command="{Binding SelectTabAtCommand}" CommandParameter="6" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D7" Command="{Binding SelectTabAtCommand}" CommandParameter="7" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D8" Command="{Binding SelectTabAtCommand}" CommandParameter="8" />
+    <KeyBinding Modifiers="Ctrl+Alt" Key="D9" Command="{Binding SelectTabAtCommand}" CommandParameter="9" />
+  </Window.InputBindings>
+
+  <!-- RootBorder recibe un margen al maximizar para compensar los bordes que el sistema deja fuera de la pantalla. -->
+  <Border x:Name="RootBorder">
+    <Grid x:Name="Root" RenderTransformOrigin="0.5,0.5">
+      <Grid.RenderTransform>
+        <ScaleTransform x:Name="RootScale" ScaleX="1" ScaleY="1" />
+      </Grid.RenderTransform>
+      <Grid.RowDefinitions>
+        <!-- Misma altura que Size.Caption.Height (RowDefinition necesita GridLength, no double). -->
+        <RowDefinition Height="40" />
+        <RowDefinition Height="*" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition x:Name="SidebarColumn" Width="240" MinWidth="180" MaxWidth="360" />
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <!-- Barra de título, sobre la barra lateral: botón de mostrar/ocultar la barra. -->
+      <Grid Grid.Row="0" Grid.Column="0" Background="{DynamicResource Brush.SidebarSurface}">
+        <Button x:Name="ToggleSidebarButton"
+                Margin="10,0,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Style="{StaticResource IconButton}"
+                WindowChrome.IsHitTestVisibleInChrome="True"
+                Command="{Binding ToggleSidebarCommand}"
+                ToolTip="{loc:Loc Frame_ToggleSidebar}"
+                AutomationProperties.Name="{loc:Loc Frame_ToggleSidebar}">
+          <controls:IconView x:Name="ToggleSidebarIcon" Data="{StaticResource Icon.PanelLeftClose}" />
+        </Button>
+      </Grid>
+
+      <!--
+        Hueco de contenido, desde arriba del todo: la ventana activa se coloca encima y su propia barra de título hace de
+        barra del grupo (sus botones minimizar/maximizar actúan sobre el marco; cerrar cierra esa ventana). Así no hay dos
+        barras de título ni dos juegos de botones (ADR 0004).
+      -->
+      <Border x:Name="Slot" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Background="{DynamicResource Brush.BgWindow}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+          <controls:IconView Data="{StaticResource Icon.AppWindow}" Width="32" Height="32" HorizontalAlignment="Center" />
+          <TextBlock Margin="0,12,0,0"
+                     HorizontalAlignment="Center"
+                     Text="{Binding SelectedTab.DisplayName}"
+                     FontSize="{StaticResource FontSize.Title}"
+                     FontWeight="SemiBold" />
+          <TextBlock Margin="0,4,0,0"
+                     HorizontalAlignment="Center"
+                     Text="{loc:Loc Frame_SlotPlaceholder}"
+                     Foreground="{DynamicResource Brush.TextSecondary}" />
+        </StackPanel>
+      </Border>
+
+      <!-- Título y botones de TabDock: quedan detrás de la ventana activa; solo se ven con el marco vacío. -->
+      <Grid Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="14,0,12,0" Orientation="Horizontal" VerticalAlignment="Center">
+          <TextBlock x:Name="CaptionActive" Text="{Binding SelectedTab.DisplayName}" FontWeight="Medium" TextTrimming="CharacterEllipsis" />
+          <TextBlock x:Name="CaptionGroup" Margin="8,0,0,0" Text="{Binding Title}" Foreground="{DynamicResource Brush.TextSecondary}" TextTrimming="CharacterEllipsis" />
+        </StackPanel>
+        <controls:CaptionButtons x:Name="Caption"
+                                 Grid.Column="1"
+                                 Height="40"
+                                 VerticalAlignment="Top"
+                                 MinimizeCommand="{Binding WindowMinimizeCommand, ElementName=Frame}"
+                                 MaximizeCommand="{Binding WindowMaximizeCommand, ElementName=Frame}"
+                                 CloseCommand="{Binding WindowCloseCommand, ElementName=Frame}" />
+      </Grid>
+
+      <!-- Barra lateral -->
+      <Grid x:Name="Sidebar" Grid.Row="1" Grid.Column="0" Background="{DynamicResource Brush.SidebarSurface}">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="Auto" />
+          <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBox x:Name="SearchBox"
+                 Grid.Row="0"
+                 Margin="12,4,12,10"
+                 Style="{StaticResource SearchBox}"
+                 Tag="{loc:Loc Frame_Search}"
+                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                 AutomationProperties.Name="{loc:Loc Frame_Search}">
+          <TextBox.InputBindings>
+            <KeyBinding Key="Escape" Command="{Binding ClearSearchCommand}" />
+          </TextBox.InputBindings>
+        </TextBox>
+
+        <TextBlock x:Name="SectionHeader"
+                   Grid.Row="1"
+                   Margin="20,4,12,6"
+                   Text="{loc:Loc Frame_SectionWindows}"
+                   FontSize="{StaticResource FontSize.Section}"
+                   FontWeight="SemiBold"
+                   Foreground="{DynamicResource Brush.TextSecondary}" />
+
+        <Grid Grid.Row="2">
+          <controls:SidebarTabList x:Name="TabList"
+                                   ItemsSource="{Binding TabsView}"
+                                   SelectedItem="{Binding SelectedTab}"
+                                   AllowReorder="{Binding CanReorder}"
+                                   SelectedItemClickCommand="{Binding ReactivateSelectedCommand}"
+                                   AutomationProperties.Name="{loc:Loc Frame_TabList}" />
+
+          <TextBlock Margin="20,8" TextWrapping="Wrap" Foreground="{DynamicResource Brush.TextSecondary}" Text="{loc:Loc Frame_Empty}">
+            <TextBlock.Style>
+              <Style TargetType="TextBlock">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </TextBlock.Style>
+          </TextBlock>
+          <TextBlock Margin="20,8" TextWrapping="Wrap" Foreground="{DynamicResource Brush.TextSecondary}" Text="{loc:Loc Frame_NoResults}">
+            <TextBlock.Style>
+              <Style TargetType="TextBlock">
+                <Setter Property="Visibility" Value="Collapsed" />
+                <Style.Triggers>
+                  <DataTrigger Binding="{Binding HasNoResults}" Value="True">
+                    <Setter Property="Visibility" Value="Visible" />
+                  </DataTrigger>
+                </Style.Triggers>
+              </Style>
+            </TextBlock.Style>
+          </TextBlock>
+        </Grid>
+      </Grid>
+
+      <GridSplitter x:Name="Splitter"
+                    Grid.Row="0"
+                    Grid.RowSpan="2"
+                    Grid.Column="1"
+                    Style="{StaticResource SidebarSplitter}"
+                    DragCompleted="OnSplitterDragCompleted"
+                    AutomationProperties.Name="{loc:Loc Frame_ResizeSidebar}" />
+
+    </Grid>
+  </Border>
+</Window>

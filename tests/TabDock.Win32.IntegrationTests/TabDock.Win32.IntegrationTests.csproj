@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Requiere un escritorio interactivo: crea ventanas reales con TabDock.TestTarget. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <!-- Dispatcher de WPF para el hilo con bucle de mensajes que necesitan los hooks de eventos. -->
+    <UseWPF>true</UseWPF>
+    <!-- LibraryImport en las pruebas (leer atributos de DWM) -->
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\TabDock.Win32\TabDock.Win32.csproj" />
+    <!-- Solo para que TabDock.TestTarget.exe se compile y se copie junto a las pruebas. -->
+    <ProjectReference Include="..\..\src\TabDock.TestTarget\TabDock.TestTarget.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <!-- Copia la salida completa de TestTarget (exe, dll, runtimeconfig) a la carpeta de pruebas. -->
+  <Target Name="CopyTestTarget" AfterTargets="Build">
+    <MSBuild Projects="..\..\src\TabDock.TestTarget\TabDock.TestTarget.csproj" Targets="GetTargetPath" Properties="Configuration=$(Configuration)">
+      <Output TaskParameter="TargetOutputs" ItemName="_TestTargetDll" />
+    </MSBuild>
+    <PropertyGroup>
+      <_TestTargetDir>@(_TestTargetDll->'%(RootDir)%(Directory)')</_TestTargetDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <_TestTargetFiles Include="$(_TestTargetDir)TabDock.TestTarget.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_TestTargetFiles)" DestinationFolder="$(OutDir)" SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>
