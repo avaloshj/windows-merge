@@ -115,3 +115,6 @@ EnumDisplayMonitors
 GetDpiForMonitor
 MONITOR_DPI_TYPE
 MONITORINFOF_PRIMARY
+
+// Tamaño del icono de la bandeja
+GetSystemMetrics

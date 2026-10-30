@@ -67,7 +67,8 @@ foreach ($rid in $Runtime) {
         "== Empaquetando $rid con Velopack"
         $releases = Join-Path $Root "artifacts\releases\$rid"
         $packArgs = @('pack', '--packId', 'TabDock', '--packVersion', $Version, '--packDir', $out, '--mainExe', 'TabDock.exe',
-            '--packTitle', 'TabDock', '--runtime', $rid, '--outputDir', $releases)
+            '--packTitle', 'TabDock', '--runtime', $rid, '--outputDir', $releases,
+            '--icon', (Join-Path $Root 'src\TabDock.App\Assets\TabDock.ico'))
         if ($Sign) {
             $packArgs += @('--signParams', "/fd SHA256 /td SHA256 /tr $env:TABDOCK_SIGN_TIMESTAMP_URL /f `"$env:TABDOCK_SIGN_CERT_PATH`" /p $env:TABDOCK_SIGN_CERT_PASSWORD")
         }

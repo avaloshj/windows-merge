@@ -20,4 +20,15 @@ powershell -ExecutionPolicy Bypass -File build\e2e-<nombre>.ps1   # extremo a ex
 powershell -ExecutionPolicy Bypass -File build\publish.ps1        # publicación x64/arm64
 ```
 
+## Icono
+
+`src/TabDock.App/Assets/TabDock.png` es el origen (idealmente de 256×256 con transparencia). Tras cambiarlo:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File build\make-icon.ps1   # genera Assets\TabDock.ico (16–256 px)
+```
+
+El `.ico` lo usan el ejecutable (barra de tareas, Alt+Tab, Explorador, título de las ventanas), la bandeja del sistema
+y el instalador de Velopack.
+
 Sin red ni telemetría. Los registros enmascaran títulos, rutas y nombres de proyecto.

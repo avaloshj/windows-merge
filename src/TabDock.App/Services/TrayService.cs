@@ -1,7 +1,6 @@
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using H.NotifyIcon;
 using H.NotifyIcon.Core;
 using Microsoft.Extensions.DependencyInjection;
@@ -9,6 +8,7 @@ using TabDock.App.Localization;
 using TabDock.App.Views;
 using TabDock.Core.Domain;
 using TabDock.Infrastructure;
+using TabDock.Win32.Shell;
 
 namespace TabDock.App.Services;
 
@@ -29,13 +29,7 @@ public sealed class TrayService(IServiceProvider services, FrameCoordinator coor
         _icon = new TaskbarIcon
         {
             ToolTipText = TextResources.Get("App_Name"),
-            IconSource = new GeneratedIconSource
-            {
-                Text = "T",
-                Foreground = Brushes.White,
-                Background = new SolidColorBrush(Color.FromRgb(0x1E, 0x7B, 0xFF)),
-                FontWeight = FontWeights.Bold,
-            },
+            Icon = LoadIcon(),
             ContextMenu = BuildMenu(settings),
             NoLeftClickDelay = true,
         };
@@ -58,6 +52,17 @@ public sealed class TrayService(IServiceProvider services, FrameCoordinator coor
     {
         _icon?.Dispose();
         _icon = null;
+    }
+
+    /// <summary>
+    /// Icono de la aplicación al tamaño exacto de la bandeja: el .ico trae varios tamaños y se elige el del sistema, así
+    /// Windows no tiene que reescalarlo (se vería borroso).
+    /// </summary>
+    private static System.Drawing.Icon LoadIcon()
+    {
+        var size = SystemIconSize.Small();
+        using var stream = Application.GetResourceStream(new Uri("pack://application:,,,/Assets/TabDock.ico", UriKind.Absolute))!.Stream;
+        return new System.Drawing.Icon(stream, size, size);
     }
 
     private void OpenContextMenu()

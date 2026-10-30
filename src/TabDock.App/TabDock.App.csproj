@@ -7,6 +7,8 @@
     <AssemblyName>TabDock</AssemblyName>
     <RootNamespace>TabDock.App</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <!-- Icono del ejecutable: lo usan la barra de tareas, Alt+Tab, el Explorador y las ventanas sin icono propio. -->
+    <ApplicationIcon>Assets\TabDock.ico</ApplicationIcon>
     <!-- Strings.resx (neutro) está en español; Strings.en.resx genera el satélite en inglés. -->
     <NeutralLanguage>es</NeutralLanguage>
   </PropertyGroup>
@@ -14,6 +16,8 @@
   <ItemGroup>
     <!-- Inter (OFL 1.1): pesos estáticos; WPF no interpreta los ejes de las fuentes variables. -->
     <Resource Include="Fonts\*.ttf" />
+    <!-- Icono de la bandeja (se lee del recurso al tamaño de icono pequeño del sistema). Se regenera con build\make-icon.ps1. -->
+    <Resource Include="Assets\TabDock.ico" />
   </ItemGroup>
 
   <ItemGroup>
